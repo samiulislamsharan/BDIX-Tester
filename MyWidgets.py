@@ -7,12 +7,14 @@ class MyTable(QTableView):
         super(MyTable, self).__init__()
 
     def contextMenuEvent(self, event) -> None:
-        if modelList:= self.selectionModel().selection().indexes():
+        if modelList := self.selectionModel().selection().indexes():
             try:
-                data = modelList[0].sibling(modelList[0].row(),0).data()
+                data = modelList[0].sibling(modelList[0].row(), 0).data()
                 menu = QMenu(self)
                 copyAction = menu.addAction("Copy")
-                copyAction.triggered.connect(lambda : QApplication.clipboard().setText(str(data)))
+                copyAction.triggered.connect(
+                    lambda: QApplication.clipboard().setText(str(data))
+                )
                 menu.popup(QCursor.pos())
             except Exception as e:
                 print(e)
